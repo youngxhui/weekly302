@@ -7,3 +7,16 @@
 ## 维护
 
 项目由 302 实验室维护
+
+## 提交新周报
+
+- 项目已经集成 ci
+- 请按照要求进行文章的提交
+
+[提交新周报](https://github.com/youngxhui/weekly302/pulls)
+
+## 问题及建议
+
+欢迎你的建议和意见，让我们做的更好
+
+[问题与建议反馈](https://github.com/youngxhui/weekly302/issues)

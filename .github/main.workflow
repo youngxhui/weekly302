@@ -26,7 +26,7 @@ action "编译vuepress" {
 }
 
 action "部署到firebase" {
-  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
+  uses = "w9jds/firebase-action@7d6b2b058813e1224cdd4db255b2f163ae4084d3"
   needs = [
     "编译vuepress",
     "安装firebase cli",
@@ -35,7 +35,9 @@ action "部署到firebase" {
   env = {
     FIREBASE_TOKEN = "1/Udok2g7rYvEHyDemCn37IX_w32sIc6KS1ttabaz7xoo9bw_D-0p379zhUVjTMX7r"
   }
-  secrets = ["GITHUB_TOKEN"]
+  secrets = [
+    "FIREBASE_TOKEN",
+  ]
 }
 
 action "安装firebase cli" {

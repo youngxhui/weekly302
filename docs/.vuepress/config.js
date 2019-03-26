@@ -4,6 +4,13 @@ module.exports = {
   dest: './docs/.vuepress/dist',
   base: '/',
   themeConfig: {
+    serviceWorker: {
+      updatePopup: true,
+      updatePopup: {
+        message: '内容有更新，请刷新',
+        buttonText: '刷新',
+      },
+    },
     repo: 'youngxhui/weekly302',
     editLinkText: '编辑本页',
     editLinks: true,

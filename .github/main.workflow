@@ -32,9 +32,6 @@ action "部署到firebase" {
     "安装firebase cli",
   ]
   runs = "firebase deploy --token $FIREBASE_TOKEN"
-  env = {
-    FIREBASE_TOKEN = "1/Udok2g7rYvEHyDemCn37IX_w32sIc6KS1ttabaz7xoo9bw_D-0p379zhUVjTMX7r"
-  }
   secrets = [
     "FIREBASE_TOKEN",
   ]

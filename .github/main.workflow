@@ -24,5 +24,7 @@ action "GitHub Action for npm" {
   uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
   needs = ["编译vuepress"]
   runs = "firebase deploy --token $FIREBASE_TOKEN"
-  secrets = ["FIREBASE_TOKEN"]
+  env = {
+    FIREBASE_TOKEN = "1/Udok2g7rYvEHyDemCn37IX_w32sIc6KS1ttabaz7xoo9bw_D-0p379zhUVjTMX7r"
+  }
 }

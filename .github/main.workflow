@@ -1,45 +1,22 @@
-workflow "New workflow" {
+workflow "自动化集成部署" {
   on = "push"
-  resolves = [
-    "下载npm",
-    "安装firebase cli",
-    "部署到firebase",
-  ]
+  resolves = ["GitHub Action for Firebase"]
 }
 
-action "下载npm" {
+action "安装依赖" {
   uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
-  runs = "npm install"
+  args = "install"
 }
 
-action "更新npm" {
+action "进行编译" {
   uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
-  needs = ["下载npm"]
-  runs = "npm i npm@latest -g"
-}
-
-action "编译vuepress" {
-  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
-  needs = ["更新npm"]
+  needs = ["安装依赖"]
   runs = "npm run build"
-  secrets = ["GITHUB_TOKEN"]
 }
 
-action "部署到firebase" {
+action "GitHub Action for Firebase" {
   uses = "w9jds/firebase-action@7d6b2b058813e1224cdd4db255b2f163ae4084d3"
-  needs = [
-    "编译vuepress",
-    "安装firebase cli",
-  ]
-  runs = "firebase deploy --token $FIREBASE_TOKEN"
-  secrets = [
-    "FIREBASE_TOKEN",
-  ]
-}
-
-action "安装firebase cli" {
-  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
-  needs = ["更新npm"]
-  runs = "npm install firebase-tools"
-  secrets = ["GITHUB_TOKEN"]
+  needs = ["进行编译"]
+  secrets = ["FIREBASE_TOKEN"]
+  args = "deploy --only hosting"
 }

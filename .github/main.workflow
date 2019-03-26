@@ -1,6 +1,6 @@
 workflow "自动化集成部署" {
   on = "push"
-  resolves = ["GitHub Action for Firebase"]
+  resolves = ["部署到 Firebase"]
 }
 
 action "安装依赖" {
@@ -14,7 +14,7 @@ action "进行编译" {
   runs = "npm run build"
 }
 
-action "GitHub Action for Firebase" {
+action "部署到 Firebase" {
   uses = "w9jds/firebase-action@7d6b2b058813e1224cdd4db255b2f163ae4084d3"
   needs = ["进行编译"]
   secrets = ["FIREBASE_TOKEN"]

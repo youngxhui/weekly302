@@ -1,6 +1,10 @@
 workflow "New workflow" {
   on = "push"
-  resolves = ["下载npm", "GitHub Action for npm"]
+  resolves = [
+    "下载npm",
+    "安装firebase cli",
+    "部署到firebase",
+  ]
 }
 
 action "下载npm" {
@@ -20,11 +24,20 @@ action "编译vuepress" {
   runs = "npm run build"
 }
 
-action "GitHub Action for npm" {
+action "部署到firebase" {
   uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
-  needs = ["编译vuepress"]
+  needs = [
+    "编译vuepress",
+    "安装firebase cli",
+  ]
   runs = "firebase deploy --token $FIREBASE_TOKEN"
   env = {
     FIREBASE_TOKEN = "1/Udok2g7rYvEHyDemCn37IX_w32sIc6KS1ttabaz7xoo9bw_D-0p379zhUVjTMX7r"
   }
+}
+
+action "安装firebase cli" {
+  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
+  needs = ["更新npm"]
+  runs = "npm install -g firebase-tools"
 }

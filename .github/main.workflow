@@ -40,3 +40,19 @@ action "部署 Firebase" {
   secrets = ["FIREBASE_TOKEN"]
   needs = ["分支监测"]
 }
+
+workflow "PR 检查" {
+  on = "pull_request"
+  resolves = ["编译"]
+}
+
+action "安装npm依赖" {
+  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
+  runs = "npm install"
+}
+
+action "编译" {
+  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
+  needs = ["安装npm依赖"]
+  runs = "npm run build"
+}
